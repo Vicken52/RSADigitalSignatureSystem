@@ -29,18 +29,60 @@
 package project;
 
 import java.math.*;
+import java.util.*;
+import java.io.*;
 
 public class KeyGen 
 {
-	public static void main(String[] args) 
+	public static void main(String[] args)
 	{
-		BigInteger p, q, n;
+		final BigInteger one = new BigInteger("1");
+		final Random random = new Random();
+		BigInteger p, q, n, phi, e, d;
 		
-		p = new BigInteger("223");
-		q = new BigInteger("331");
+		p = new BigInteger(512, random);
+		q = new BigInteger(512, random);
 		
-		n = p.add(q);
-
+		n = p.multiply(q);
+		phi = p.subtract(one).multiply(q.subtract(one));
+		e = new BigInteger(512, random);
+		
+		while(true)
+		{
+			if(e.gcd(phi).equals(one))
+			{
+				d = e.modInverse(phi);
+				break;
+			}
+			else
+			{
+				e = new BigInteger(512, random);
+			}
+		}
+		
+		System.out.println("e = " + e);
+		System.out.println("d = " + d);
+		System.out.println("n = " + n);
+		
+		try 
+		{
+			FileOutputStream pub = new FileOutputStream("pubkey.rsa");
+			FileOutputStream priv = new FileOutputStream("privkey.rsa");
+			
+			ObjectOutputStream pubkey = new ObjectOutputStream(pub);
+			ObjectOutputStream privkey = new ObjectOutputStream(priv);
+			
+			pubkey.writeObject(e);
+			pubkey.writeObject(n);
+			pubkey.close();
+			
+			privkey.writeObject(d);
+			privkey.writeObject(n);
+			privkey.close();
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
-
 }

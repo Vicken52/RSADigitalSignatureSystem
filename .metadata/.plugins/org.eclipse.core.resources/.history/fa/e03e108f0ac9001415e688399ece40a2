@@ -56,7 +56,7 @@ import java.security.*;
 public class DigitalSignature 
 {
 
-	public static void Send() 
+	public void Send() 
 	{
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("privkey.rsa"));

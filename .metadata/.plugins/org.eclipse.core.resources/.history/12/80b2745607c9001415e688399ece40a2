@@ -14,7 +14,6 @@ import java.util.*;
 
 public class Main 
 {
-	@SuppressWarnings("resource")
 	public static void main(String[] args) 
 	{
 		Scanner scanner = new Scanner(System.in);
@@ -22,20 +21,17 @@ public class Main
 		while(true)
 		{
 			System.out.println("1. Send file to Encrypt");
-			System.out.println("2. Receive File to Decrypt");
+			System.out.println("2. Recieve File to Decrypt");
 			System.out.println("3. Close Program");
 			int choice = scanner.nextInt();
 		
 			switch(choice)
 			{
 			case 1:
-				DigitalSignature.Send();
+				System.out.println("Sending File.");
 				break;
 			case 2:
 				System.out.println("Receiving File.");
-				break;
-			case 3:
-				System.exit(0);
 			}
 		}
 

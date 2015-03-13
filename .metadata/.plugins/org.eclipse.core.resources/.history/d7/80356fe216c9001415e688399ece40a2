@@ -69,7 +69,6 @@ public class DigitalSignature
 	        e = (BigInteger) pub.readObject();
 	        n = (BigInteger) pub.readObject();
 	        
-	        //Needs to be changed to User Input
 	        String file_name = "C:/Users/kriko_000/Documents/GitHub/RSADigitalSignatureSystem/CS480/test.txt";
 	        
 	        BufferedReader br = new BufferedReader(new FileReader(file_name));

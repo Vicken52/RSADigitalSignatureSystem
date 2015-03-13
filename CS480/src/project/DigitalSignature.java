@@ -70,7 +70,7 @@ public class DigitalSignature
 	        n = (BigInteger) pub.readObject();
 	        
 	        //Needs to be changed to User Input
-	        String file_name = "C:/Users/kriko_000/Documents/GitHub/RSADigitalSignatureSystem/CS480/test.txt";
+	        String file_name = "C:/Users/Vicken/Documents/GitHub/RSADigitalSignatureSystem/CS480/test.txt";
 	        
 	        BufferedReader br = new BufferedReader(new FileReader(file_name));
 	        
@@ -97,11 +97,66 @@ public class DigitalSignature
 	        BigInteger encrypted = encrypt.modPow(e, n);
 	        
 	        byte [] encryptedM = encrypted.toByteArray();
+	        
+	        FileOutputStream newT = new FileOutputStream("test.txt.signed");
+			
+			ObjectOutputStream newText = new ObjectOutputStream(newT);
+			
+			newText.writeObject(encrypted);
+			newText.writeObject(text);
+			newText.close();
+			
 		} catch (Exception ex) {
 			// TODO Auto-generated catch block
 			ex.printStackTrace();
 		}
+	}
+	
+	@SuppressWarnings({ "resource", "unused" })
+	public static void Receive() 
+	{
+		BigInteger d, n, encrypted;
+		
+		try {
+			ObjectInputStream pub = new ObjectInputStream(new FileInputStream("privkey.rsa"));
+			
+	        // read and print what we wrote before
+	        d = (BigInteger) pub.readObject();
+	        n = (BigInteger) pub.readObject();
+	        
+	        //Needs to be changed to User Input
+	        ObjectInputStream signed = new ObjectInputStream(new FileInputStream("test.txt.signed"));
+	        
+	        encrypted = (BigInteger) signed.readObject();
+	        String plaintext = (String) signed.readObject();
+	        
+	        BigInteger decrypted = encrypted.modPow(d, n);
+	        
+	        MessageDigest m1 = MessageDigest.getInstance("MD5");
+	        MessageDigest m2 = MessageDigest.getInstance("MD5");
+	        
+	        byte [] b1 = plaintext.getBytes();
+			byte [] b2 = decrypted.toByteArray();
+			
+			m1.update(b1);
+			m2.update(b2);
 
+			byte [] digest1 = m1.digest();
+			byte [] digest2 = m2.digest();
+	        
+	        if (MessageDigest.isEqual(digest1, digest2))
+	        {
+				System.out.println("Equal");
+	        }
+	        else
+	        {
+	        	System.out.println("Corrupted");
+	        }
+			
+		} catch (Exception ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
 	}
 
 }

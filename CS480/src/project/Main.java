@@ -32,7 +32,7 @@ public class Main
 				DigitalSignature.Send();
 				break;
 			case 2:
-				System.out.println("Receiving File.");
+				DigitalSignature.Receive();
 				break;
 			case 3:
 				System.exit(0);

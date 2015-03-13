@@ -2,6 +2,8 @@
 // Demonstration of the MD5 algorithm in Java.  See also MessageDigest
 // in the Java API for more information
 
+package project;
+
 import java.security.*;
 
 public class MD

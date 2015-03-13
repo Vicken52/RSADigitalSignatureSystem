@@ -51,22 +51,54 @@
 package project;
 
 import java.io.*;
-import java.security.*;
+import java.math.*;
+import java.security.MessageDigest;
 
 public class DigitalSignature 
 {
 
+	@SuppressWarnings({ "resource", "unused" })
 	public static void Send() 
 	{
+		BigInteger e, n;
+		
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("privkey.rsa"));
+			ObjectInputStream pub = new ObjectInputStream(new FileInputStream("pubkey.rsa"));
 			
 	        // read and print what we wrote before
-	        System.out.println("" + ois.readObject());
-	        System.out.println("" + ois.readObject());
-		} catch (Exception e) {
+	        e = (BigInteger) pub.readObject();
+	        n = (BigInteger) pub.readObject();
+	        
+	        String file_name = "C:/Users/kriko_000/Documents/GitHub/RSADigitalSignatureSystem/CS480/test.txt";
+	        
+	        BufferedReader br = new BufferedReader(new FileReader(file_name));
+	        
+	        StringBuilder sb = new StringBuilder();
+	        String line = br.readLine();
+
+	        while (line != null) {
+	            sb.append(line);
+	            sb.append("\n");
+	            line = br.readLine();
+	        }
+	        
+	        String text = sb.toString();
+	        
+	        MessageDigest m = MessageDigest.getInstance("MD5");
+	        
+	        byte [] b = text.getBytes();
+	        
+	        m.update(b);
+	        
+	        byte [] digest = m.digest();
+	        
+	        BigInteger encrypt = new BigInteger(digest);
+	        BigInteger encrypted = encrypt.modPow(e, n);
+	        
+	        byte [] encryptedM = encrypted.toByteArray();
+		} catch (Exception ex) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ex.printStackTrace();
 		}
 
 	}

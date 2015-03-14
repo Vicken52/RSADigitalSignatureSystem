@@ -102,7 +102,9 @@ public class DigitalSignature
 	        
 	        byte [] encryptedM = encrypted.toByteArray();
 	        
-	        FileOutputStream newT = new FileOutputStream("test.txt.signed");
+	        String outputFile = file_name + ".signed";
+	        
+	        FileOutputStream newT = new FileOutputStream(outputFile);
 			
 			ObjectOutputStream newText = new ObjectOutputStream(newT);
 			

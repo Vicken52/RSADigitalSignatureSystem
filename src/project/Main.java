@@ -23,7 +23,9 @@ public class Main
 		{
 			System.out.println("1. Send file to Encrypt");
 			System.out.println("2. Receive File to Decrypt");
-			System.out.println("3. Close Program");
+			System.out.println("3. Generate Keys");
+			System.out.println("4. Change Byte");
+			System.out.println("5. Close Program");
 			int choice = scanner.nextInt();
 		
 			switch(choice)
@@ -35,6 +37,10 @@ public class Main
 				DigitalSignature.Receive();
 				break;
 			case 3:
+				KeyGen.Generate();
+			case 4:
+				ChangeByte.Change();
+			case 5:
 				System.exit(0);
 			}
 		}

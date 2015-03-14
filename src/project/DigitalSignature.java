@@ -53,6 +53,7 @@ package project;
 import java.io.*;
 import java.math.*;
 import java.security.MessageDigest;
+import java.util.Scanner;
 
 public class DigitalSignature 
 {
@@ -70,7 +71,10 @@ public class DigitalSignature
 	        n = (BigInteger) pub.readObject();
 	        
 	        //Needs to be changed to User Input
-	        String file_name = "C:/Users/Vicken/Documents/GitHub/RSADigitalSignatureSystem/CS480/test.txt";
+	        Scanner in = new Scanner(System.in);
+	        
+	        System.out.println("Please enter the file name for the Plaintext (test.txt):");
+			String file_name = in.next();
 	        
 	        BufferedReader br = new BufferedReader(new FileReader(file_name));
 	        
@@ -112,7 +116,7 @@ public class DigitalSignature
 		}
 	}
 	
-	@SuppressWarnings({ "resource", "unused" })
+	@SuppressWarnings({ "resource" })
 	public static void Receive() 
 	{
 		BigInteger d, n, encrypted;
@@ -125,7 +129,12 @@ public class DigitalSignature
 	        n = (BigInteger) pub.readObject();
 	        
 	        //Needs to be changed to User Input
-	        ObjectInputStream signed = new ObjectInputStream(new FileInputStream("test.txt.signed"));
+	        Scanner in = new Scanner(System.in);
+	        
+	        System.out.println("Please enter the file name for the Plaintext (test.txt.signed):");
+			String file_name = in.next();
+	        
+	        ObjectInputStream signed = new ObjectInputStream(new FileInputStream(file_name));
 	        
 	        encrypted = (BigInteger) signed.readObject();
 	        String plaintext = (String) signed.readObject();

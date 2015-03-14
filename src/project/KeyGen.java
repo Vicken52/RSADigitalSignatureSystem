@@ -34,7 +34,7 @@ import java.io.*;
 
 public class KeyGen 
 {
-	public static void main(String[] args)
+	public static void Generate()
 	{
 		final BigInteger one = new BigInteger("1");
 		final Random random = new Random();

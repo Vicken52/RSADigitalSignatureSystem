@@ -64,7 +64,8 @@ public class DigitalSignature
 		BigInteger e, n;
 		
 		try {
-			ObjectInputStream pub = new ObjectInputStream(new FileInputStream("pubkey.rsa"));
+			ObjectInputStream pub = new ObjectInputStream(
+					new FileInputStream("../../pubkey.rsa"));
 			
 	        // read and print what we wrote before
 	        e = (BigInteger) pub.readObject();
@@ -73,7 +74,8 @@ public class DigitalSignature
 	        //Needs to be changed to User Input
 	        Scanner in = new Scanner(System.in);
 	        
-	        System.out.println("Please enter the file name for the Plaintext (test.txt):");
+	        System.out.println(
+		       "Please enter the file name for the Plaintext (test.txt):");
 		String file_name = in.next();
 	        
 	        BufferedReader br = new BufferedReader(new FileReader(file_name));
@@ -122,7 +124,8 @@ public class DigitalSignature
 		BigInteger d, n, encrypted;
 		
 		try {
-			ObjectInputStream pub = new ObjectInputStream(new FileInputStream("privkey.rsa"));
+			ObjectInputStream pub = new ObjectInputStream(
+					new FileInputStream("../../privkey.rsa"));
 			
 	        // read and print what we wrote before
 	        d = (BigInteger) pub.readObject();

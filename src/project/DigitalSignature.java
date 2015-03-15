@@ -74,7 +74,7 @@ public class DigitalSignature
 	        Scanner in = new Scanner(System.in);
 	        
 	        System.out.println("Please enter the file name for the Plaintext (test.txt):");
-		String file_name = in.next();
+	        String file_name = in.next();
 	        
 	        BufferedReader br = new BufferedReader(new FileReader(file_name));
 	        
@@ -133,36 +133,38 @@ public class DigitalSignature
 	        //Needs to be changed to User Input
 	        Scanner in = new Scanner(System.in);
 	        
-	        System.out.println("Please enter the file name for the Plaintext (test.txt.signed):");
-			String file_name = in.next();
-	        
-	        ObjectInputStream signed = new ObjectInputStream(new FileInputStream(file_name));
-	        
-	        encrypted = (BigInteger) signed.readObject();
-	        String plaintext = (String) signed.readObject();
-	        
-	        BigInteger decrypted = encrypted.modPow(d, n);
-	        
-	        MessageDigest m1 = MessageDigest.getInstance("MD5");
-	        MessageDigest m2 = MessageDigest.getInstance("MD5");
-	        
-	        byte [] b1 = plaintext.getBytes();
-			byte [] b2 = decrypted.toByteArray();
-			
-			m1.update(b1);
-			m2.update(b2);
+	        try {
+	        	System.out.println("Please enter the file name for the Plaintext (test.txt.signed):");
+				String file_name = in.next();
+		        
+		        ObjectInputStream signed = new ObjectInputStream(new FileInputStream(file_name));
+		        
+		        encrypted = (BigInteger) signed.readObject();
+		        String plaintext = (String) signed.readObject();
+		        
+		        BigInteger decrypted = encrypted.modPow(d, n);
+		        
+		        MessageDigest m = MessageDigest.getInstance("MD5");
+		        
+		        byte [] b1 = plaintext.getBytes();
+				byte [] b2 = decrypted.toByteArray();
+				
+				m.update(b1);
 
-			byte [] digest1 = m1.digest();
-			byte [] digest2 = m2.digest();
-	        
-	        if (MessageDigest.isEqual(digest1, digest2))
-	        {
-				System.out.println("Equal");
-	        }
-	        else
-	        {
-	        	System.out.println("Corrupted");
-	        }
+				byte [] digest = m.digest();
+		        
+		        if (MessageDigest.isEqual(digest, b2))
+		        {
+					System.out.println("File Uncorrupted.");
+		        }
+		        else
+		        {
+		        	System.out.println("File Corrupted.");
+		        }
+	        } catch (Exception ex1) {
+				// TODO Auto-generated catch block
+	        	System.out.println("File Corrupted.");
+			}
 			
 		} catch (Exception ex) {
 			// TODO Auto-generated catch block

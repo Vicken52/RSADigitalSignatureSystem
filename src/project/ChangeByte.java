@@ -9,11 +9,13 @@ import java.util.Random;
 
 public class ChangeByte {
 
-	public static void Change() {
+	@SuppressWarnings("resource")
+	public static void Change() 
+	{
 		//Prompt user for file name
  		Scanner input = new Scanner( System.in );
-		System.out.println("Please enter the file name.");
-    		String fileName = input.next();
+		System.out.println("Please enter the file name (test.txt.signed):");
+    	String fileName = input.next();
 
 		//read file 
 		byte[] buffer = null;
@@ -25,7 +27,7 @@ public class ChangeByte {
 			inputStream.read( buffer );
 			inputStream.close();
 		}//try
-		catch( IOException error ){
+		catch(IOException error){
 			error.printStackTrace();
 			return;
 		}//catch
@@ -38,8 +40,10 @@ public class ChangeByte {
 		int index = input.nextInt();
 
 		//change byte specified
-		for ( int i = 0; i < buffer.length; i++ ){
-			if ( i == index ){
+		for ( int i = 0; i < buffer.length; i++ )
+		{
+			if ( i == index )
+			{
 				Random random = new Random();
 				//TODO: maybe delete this println
 				System.out.println( "byte before changes: " + buffer[i] );

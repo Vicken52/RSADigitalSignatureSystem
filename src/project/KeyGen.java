@@ -40,8 +40,15 @@ public class KeyGen
 		final Random random = new Random();
 		BigInteger p, q, n, phi, e, d;
 		
-		p = new BigInteger(512, random);
-		q = new BigInteger(512, random);
+		do{
+			p = new BigInteger( 512, random );
+		}//do
+		while( !p.isProbablePrime( 20 ) );
+
+		do{
+			q = new BigInteger( 512, random );
+		}//do
+		while( !q.isProbablePrime( 20 ) );
 		
 		n = p.multiply(q);
 		phi = p.subtract(one).multiply(q.subtract(one));
@@ -69,19 +76,17 @@ public class KeyGen
 		BigInteger encrypted = p.modPow( e , n );
  		BigInteger unencrypted = encrypted.modPow( d,n);
 
-
-		if( p.equals( unencrypted))
-			System.out.println("equal");
-		else
-			System.out.println("unequal");
 		
-		try 
-		{
-			FileOutputStream pub = new FileOutputStream("../../pubkey.rsa");
-			FileOutputStream priv = new FileOutputStream("../../privkey.rsa");
+		try{ 
+		
+			FileOutputStream pub = new FileOutputStream(
+                                                            "../../pubkey.rsa");
+			FileOutputStream priv = new FileOutputStream(
+                                                           "../../privkey.rsa");
 			
 			ObjectOutputStream pubkey = new ObjectOutputStream(pub);
-			ObjectOutputStream privkey = new ObjectOutputStream(priv);
+			ObjectOutputStream privkey = new ObjectOutputStream(
+									priv);
 			
 			pubkey.writeObject(e);
 			pubkey.writeObject(n);
@@ -94,6 +99,8 @@ public class KeyGen
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-	}
+		}//catch
+	}//generate
+
+
 }

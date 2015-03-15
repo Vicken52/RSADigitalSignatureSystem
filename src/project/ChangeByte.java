@@ -42,8 +42,7 @@ public class ChangeByte {
 			if ( i == index ){
 				Random random = new Random();
 				//TODO: maybe delete this println
-				System.out.println( "byte before changes: " 
-								+ buffer[i] );
+				System.out.println( "byte before changes: " + buffer[i] );
 				buffer[i] = (byte) ( random.nextInt( 256 ) - 128 );
 				
 				//TODO: maybe delete this println
@@ -62,6 +61,7 @@ public class ChangeByte {
 			return;
 		}//catch
 		input.close();
-	        
+		
+	}//change()
 
 }

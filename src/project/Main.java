@@ -38,10 +38,13 @@ public class Main
 				break;
 			case 3:
 				KeyGen.Generate();
+				break;
 			case 4:
 				ChangeByte.Change();
+				break;
 			case 5:
 				System.exit(0);
+				break;
 			}
 		}
 

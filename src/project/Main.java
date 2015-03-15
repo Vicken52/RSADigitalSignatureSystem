@@ -24,8 +24,7 @@ public class Main
 			System.out.println("1. Send file to Encrypt");
 			System.out.println("2. Receive File to Decrypt");
 			System.out.println("3. Generate Keys");
-			System.out.println("4. Change Byte");
-			System.out.println("5. Close Program");
+			System.out.println("4. Close Program");
 			int choice = scanner.nextInt();
 		
 			switch(choice)
@@ -40,9 +39,6 @@ public class Main
 				KeyGen.Generate();
 				break;
 			case 4:
-				ChangeByte.Change();
-				break;
-			case 5:
 				System.exit(0);
 				break;
 			}

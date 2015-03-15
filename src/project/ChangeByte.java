@@ -10,7 +10,7 @@ import java.util.Random;
 public class ChangeByte {
 
 	@SuppressWarnings("resource")
-	public static void Change() 
+	public static void main(String[] args) 
 	{
 		//Prompt user for file name
  		Scanner input = new Scanner( System.in );

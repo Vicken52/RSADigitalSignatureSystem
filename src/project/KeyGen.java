@@ -26,7 +26,7 @@
  * */
 
 
-//package project;
+package project;
 
 import java.math.*;
 import java.util.*;
@@ -56,8 +56,7 @@ public class KeyGen
 		
 		while(true){
 	                //makes sure 1 < e < n & e is prime of phi	
-			if( e.gcd(phi).equals(one) && e.compareTo( one ) > 0 
-                                                      && e.compareTo( n ) < 0 ){
+			if( e.gcd(phi).equals(one) && e.compareTo( one ) > 0 && e.compareTo( n ) < 0 ){
 			
 				d = e.modInverse(phi);
 				break;
@@ -79,14 +78,11 @@ public class KeyGen
 		
 		try{ 
 		
-			FileOutputStream pub = new FileOutputStream(
-                                                            "../../pubkey.rsa");
-			FileOutputStream priv = new FileOutputStream(
-                                                           "../../privkey.rsa");
+			FileOutputStream pub = new FileOutputStream( "pubkey.rsa");
+			FileOutputStream priv = new FileOutputStream( "privkey.rsa");
 			
 			ObjectOutputStream pubkey = new ObjectOutputStream(pub);
-			ObjectOutputStream privkey = new ObjectOutputStream(
-									priv);
+			ObjectOutputStream privkey = new ObjectOutputStream( priv);
 			
 			pubkey.writeObject(e);
 			pubkey.writeObject(n);

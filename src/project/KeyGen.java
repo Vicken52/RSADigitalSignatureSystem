@@ -44,7 +44,7 @@ public class KeyGen
 		q = new BigInteger(512, random);
 		
 		n = p.multiply(q);
-		phi = p.subtract(one).multiply(q.subtract(one));
+		phi = (p.subtract(one)).multiply(q.subtract(one));
 		e = new BigInteger(512, random);
 		
 		while(true)

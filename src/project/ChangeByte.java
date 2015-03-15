@@ -62,5 +62,6 @@ public class ChangeByte {
 			return;
 		}//catch
 		input.close();
+	        
 
 }

@@ -36,7 +36,7 @@ public class KeyGen
 {
 	public static void Generate()
 	{
-		final BigInteger one = new BigInteger("1");
+		final BigInteger one = BigInteger.ONE;
 		final Random random = new Random();
 		BigInteger p, q, n, phi, e, d;
 		
@@ -47,27 +47,38 @@ public class KeyGen
 		phi = p.subtract(one).multiply(q.subtract(one));
 		e = new BigInteger(512, random);
 		
-		while(true)
-		{
-			if(e.gcd(phi).equals(one))
-			{
+		while(true){
+	                //makes sure 1 < e < n & e is prime of phi	
+			if( e.gcd(phi).equals(one) && e.compareTo( one ) > 0 
+                                                      && e.compareTo( n ) < 0 ){
+			
 				d = e.modInverse(phi);
 				break;
-			}
-			else
-			{
+			}//if
+			else{
 				e = new BigInteger(512, random);
-			}
-		}
+			}//else
+		}//while
 		
 		System.out.println("e = " + e);
 		System.out.println("d = " + d);
 		System.out.println("n = " + n);
+
+		p = BigInteger.valueOf( 25);
+
+		BigInteger encrypted = p.modPow( e , n );
+ 		BigInteger unencrypted = encrypted.modPow( d,n);
+
+
+		if( p.equals( unencrypted))
+			System.out.println("equal");
+		else
+			System.out.println("unequal");
 		
 		try 
 		{
-			FileOutputStream pub = new FileOutputStream("pubkey.rsa");
-			FileOutputStream priv = new FileOutputStream("privkey.rsa");
+			FileOutputStream pub = new FileOutputStream("../../pubkey.rsa");
+			FileOutputStream priv = new FileOutputStream("../../privkey.rsa");
 			
 			ObjectOutputStream pubkey = new ObjectOutputStream(pub);
 			ObjectOutputStream privkey = new ObjectOutputStream(priv);

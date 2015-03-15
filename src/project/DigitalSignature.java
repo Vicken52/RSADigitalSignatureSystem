@@ -23,7 +23,7 @@
  *			in Part 1 of the project using the RSA algorithm. To make 
  *			verification easier, prepend this value to your plaintext 
  *			file (i.e. put it in the front of the file). You can do 
- *			this using an ObjectOutputStream – first write your BigInteger
+ *			this using an ObjectOutputStream first write your BigInteger
  *			signature value, then write the rest of your file byte by byte. 
  *			Your message is now ready to "send".  However, for the purposes 
  *			of this project you will simply leave it in the file. If your 
@@ -43,12 +43,12 @@
  * 			MessageDigest object. Once you have added all of the bytes, 
  * 			obtain the message digest for the received file. If this 
  * 			exactly matches the transmitted message digest, the message has 
- * 			not been tampered with – otherwise it has been tampered with. 
+ * 			not been tampered with  otherwise it has been tampered with. 
  * 			The receiver should output a message indicating whether or not 
  * 			the received file was valid.
  * */
 
-package project;
+//package project;
 
 import java.io.*;
 import java.math.*;
@@ -74,7 +74,7 @@ public class DigitalSignature
 	        Scanner in = new Scanner(System.in);
 	        
 	        System.out.println("Please enter the file name for the Plaintext (test.txt):");
-			String file_name = in.next();
+		String file_name = in.next();
 	        
 	        BufferedReader br = new BufferedReader(new FileReader(file_name));
 	        

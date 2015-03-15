@@ -1,4 +1,4 @@
-package project;
+//package project;
 
 import java.util.Scanner;
 import java.io.FileInputStream;
@@ -10,12 +10,12 @@ import java.util.Random;
 public class ChangeByte {
 
 	@SuppressWarnings("resource")
-	public static void main(String[] args) 
-	{
+	public static void Change(){
+	
 		//Prompt user for file name
  		Scanner input = new Scanner( System.in );
 		System.out.println("Please enter the file name (test.txt.signed):");
-    	String fileName = input.next();
+    		String fileName = input.next();
 
 		//read file 
 		byte[] buffer = null;
@@ -38,6 +38,7 @@ public class ChangeByte {
 				+ buffer.length + " .");
 
 		int index = input.nextInt();
+		input.nextLine();
 
 		//change byte specified
 		for ( int i = 0; i < buffer.length; i++ )
@@ -64,7 +65,6 @@ public class ChangeByte {
 			error.printStackTrace();
 			return;
 		}//catch
-		input.close();
 		
 	}//change()
 

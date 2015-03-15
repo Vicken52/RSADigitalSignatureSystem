@@ -58,7 +58,7 @@ import java.util.Scanner;
 public class DigitalSignature 
 {
 
-	@SuppressWarnings({ "resource" })
+	@SuppressWarnings({ "resource", "unused" })
 	public static void Send() 
 	{
 		BigInteger e, n;
@@ -99,6 +99,8 @@ public class DigitalSignature
 	        
 	        BigInteger encrypt = new BigInteger(digest);
 	        BigInteger encrypted = encrypt.modPow(e, n);
+	        
+	        byte [] encryptedM = encrypted.toByteArray();
 	        
 	        String outputFile = file_name + ".signed";
 	        
@@ -141,16 +143,19 @@ public class DigitalSignature
 	        
 	        BigInteger decrypted = encrypted.modPow(d, n);
 	        
-	        MessageDigest m = MessageDigest.getInstance("MD5");
+	        MessageDigest m1 = MessageDigest.getInstance("MD5");
+	        MessageDigest m2 = MessageDigest.getInstance("MD5");
 	        
 	        byte [] b1 = plaintext.getBytes();
 			byte [] b2 = decrypted.toByteArray();
 			
-			m.update(b1);
-			
-			byte [] digest = m.digest();
-			
-	        if (MessageDigest.isEqual(digest, b2))
+			m1.update(b1);
+			m2.update(b2);
+
+			byte [] digest1 = m1.digest();
+			byte [] digest2 = m2.digest();
+	        
+	        if (MessageDigest.isEqual(digest1, digest2))
 	        {
 				System.out.println("Equal");
 	        }

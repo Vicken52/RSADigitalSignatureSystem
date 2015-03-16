@@ -1,11 +1,11 @@
-//package project;
+package project;
 
+import java.security.SecureRandom;
 import java.util.Scanner;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 public class ChangeByte {
 
@@ -15,7 +15,7 @@ public class ChangeByte {
 		//Prompt user for file name
  		Scanner input = new Scanner( System.in );
 		System.out.println("Please enter the file name (test.txt.signed):");
-    		String fileName = input.next();
+    	String fileName = input.next();
 
 		//read file 
 		byte[] buffer = null;
@@ -45,9 +45,10 @@ public class ChangeByte {
 		{
 			if ( i == index )
 			{
-				Random random = new Random();
+				SecureRandom random = new SecureRandom();
 				//TODO: maybe delete this println
 				System.out.println( "byte before changes: " + buffer[i] );
+
 				buffer[i] = (byte) ( random.nextInt( 256 ) - 128 );
 				
 				//TODO: maybe delete this println

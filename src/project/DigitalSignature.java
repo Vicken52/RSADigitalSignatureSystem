@@ -76,18 +76,18 @@ public class DigitalSignature
 		BigInteger d, n, encrypted;
 		
 		try {
-			ObjectInputStream pub = new ObjectInputStream(new FileInputStream("privkey.rsa"));
+			ObjectInputStream priv = new ObjectInputStream(new FileInputStream("privkey.rsa"));
 			
 	        	// read and print what we wrote before
-	        	d = (BigInteger) pub.readObject();
-	        	n = (BigInteger) pub.readObject();
+	        	d = (BigInteger) priv.readObject();
+	        	n = (BigInteger) priv.readObject();
 	       	 
 	        	//Needs to be changed to User Input
 	        	Scanner in = new Scanner(System.in);
 
 	        	try {
 	        		System.out.println("Please enter the file name for the Plaintext (test.txt.signed):");
-				String file_name = in.next();
+	        		String file_name = in.next();
 		       	 
 		        	ObjectInputStream signed = new ObjectInputStream(new FileInputStream(file_name));
 		       	 
@@ -99,11 +99,11 @@ public class DigitalSignature
 		        	MessageDigest m = MessageDigest.getInstance("MD5");
 		       	 
 		        	byte [] b1 = plainText.getBytes();
-				byte [] b2 = decrypted.toByteArray();
+		        	byte [] b2 = decrypted.toByteArray();
 					
-				m.update(b1);
+		        	m.update(b1);
 	
-				byte [] digest = m.digest();
+		        	byte [] digest = m.digest();
 		       	 
 		        	if (MessageDigest.isEqual(digest, b2))
 		        	{

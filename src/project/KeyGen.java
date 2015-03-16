@@ -1,7 +1,7 @@
 package project;
 
 import java.math.*;
-import java.util.*;
+import java.security.SecureRandom;
 import java.io.*;
 
 public class KeyGen 
@@ -9,7 +9,7 @@ public class KeyGen
 	public static void Generate()
 	{
 		final BigInteger one = BigInteger.ONE;
-		final Random random = new Random();
+		final SecureRandom random = new SecureRandom();
 		BigInteger p, q, n, phi, e, d;
 		
 		do{

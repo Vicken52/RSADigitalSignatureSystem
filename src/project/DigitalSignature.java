@@ -107,7 +107,7 @@ public class DigitalSignature
 		       	 
 		        	if (MessageDigest.isEqual(digest, b2))
 		        	{
-						System.out.println("File is not corrupted.");
+					System.out.println("File is not corrupted.");
 		        	}
 		        	else
 		        	{

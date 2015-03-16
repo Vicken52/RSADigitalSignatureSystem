@@ -1,1 +1,4 @@
 /bin/
+*.rsa
+test.txt.signed
+*.signed

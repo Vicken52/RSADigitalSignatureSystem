@@ -9,12 +9,11 @@ import java.io.ObjectOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ClassNotFoundException;
-import java.util.Random;
 import java.math.BigInteger;
 
 public class ChangeByte {
 
-	@SuppressWarnings("resource")
+	@SuppressWarnings({ "resource", "unused" })
 	public static void Change(){
 	
 		//Prompt user for file name

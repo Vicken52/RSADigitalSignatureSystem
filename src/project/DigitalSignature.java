@@ -11,14 +11,14 @@ public class DigitalSignature
 	@SuppressWarnings({ "resource", "unused" })
 	public static void Send() 
 	{
-		BigInteger e, n;
+		BigInteger d, n;
 		
 		try {
-			ObjectInputStream pub = new ObjectInputStream(new FileInputStream("pubkey.rsa"));
+			ObjectInputStream priv = new ObjectInputStream(new FileInputStream("privkey.rsa"));
 			
 	        	// read and print what we wrote before
-	        	e = (BigInteger) pub.readObject();
-	        	n = (BigInteger) pub.readObject();
+	        	d = (BigInteger) priv.readObject();
+	        	n = (BigInteger) priv.readObject();
 	        
 	        	//Needs to be changed to User Input
 	        	Scanner in = new Scanner(System.in);
@@ -48,7 +48,7 @@ public class DigitalSignature
 	        	byte [] digest = m.digest();
 	       	 
 	        	BigInteger encrypt = new BigInteger(digest);
-	        	BigInteger encrypted = encrypt.modPow(e, n);
+	        	BigInteger encrypted = encrypt.modPow(d, n);
 	       	 
 	        	byte [] encryptedM = encrypted.toByteArray();
 	       	 
@@ -73,14 +73,14 @@ public class DigitalSignature
 	@SuppressWarnings({ "resource" })
 	public static void Receive() 
 	{
-		BigInteger d, n, encrypted;
+		BigInteger e, n, encrypted;
 		
 		try {
-			ObjectInputStream priv = new ObjectInputStream(new FileInputStream("privkey.rsa"));
+			ObjectInputStream pub = new ObjectInputStream(new FileInputStream("pubkey.rsa"));
 			
 	        	// read and print what we wrote before
-	        	d = (BigInteger) priv.readObject();
-	        	n = (BigInteger) priv.readObject();
+	        	e = (BigInteger) pub.readObject();
+	        	n = (BigInteger) pub.readObject();
 	       	 
 	        	//Needs to be changed to User Input
 	        	Scanner in = new Scanner(System.in);
@@ -94,7 +94,7 @@ public class DigitalSignature
 		        	encrypted = (BigInteger) signed.readObject();
 		        	String plainText = (String) signed.readObject();
 		       	 
-		        	BigInteger decrypted = encrypted.modPow(d, n);
+		        	BigInteger decrypted = encrypted.modPow(e, n);
 		        
 		        	MessageDigest m = MessageDigest.getInstance("MD5");
 		       	 
